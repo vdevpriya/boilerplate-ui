@@ -1,0 +1,6 @@
+{
+    "script": "index.js",
+    "ext": "js html",
+    "watch": "dist",
+    "watch": "src/server/server"
+}

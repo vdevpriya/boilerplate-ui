@@ -1,0 +1,14 @@
+// app sass
+// @comment split app and lib for optimal recompiling
+// @author josiah spartz
+
+@charset "UTF-8";
+
+//add globals here
+@import "variables";
+@import "mixins";
+@import "common";
+
+//add per-component sass here
+@import "../../../node_modules/vapor-styles/dist/vapor";
+@import "../../../node_modules/alta-react-components/dist/arc";

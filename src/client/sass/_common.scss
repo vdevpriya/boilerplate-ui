@@ -1,0 +1,263 @@
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: $slide-menu-background-color;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+  body {
+    color: $text-color;
+
+    .no-js {
+      color: red;
+      text-align: center;
+    }
+
+    #app-content {
+      height: 100%;
+      bottom: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      position: absolute;
+
+      
+      .async {
+        transition: opacity .3s ease-in;
+      }
+
+      .lego-logo {
+
+        width: 250px;
+        height: 250px;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-image:url('/img/lego.png');
+        margin: 0 auto;
+      }
+
+      #main-content {
+        background-color: $app-bg-color;
+//        min-height: calc(100% - 40px);
+        position: relative;
+        float: left;
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+        width: 100%;
+      }
+
+      .fetching {
+        opacity: .1;
+
+        #animation-container {
+          opacity: 1 !important;
+          .loader {
+            opacity: 1 !important;
+          }
+        }
+      }
+
+      * {
+        opacity: 1;
+        transition: $fetching-transition;
+      }
+
+      .btn-primary {
+        background-color: $primary-btn-bg-color;
+        border: $primary-btn-border;
+      }
+
+      .orc-content {
+        border: 1px solid #ddd;
+        border-radius: 2px;
+        background-color: #fff;
+        margin: 15px auto 15px;
+        padding: 25px;
+
+        h2, h3 {
+          margin-top: 0px;
+        }
+
+        pre {
+          position: relative;
+          margin: 25px;
+        }
+      }
+
+      .home-content {
+        text-align: center;
+      }
+    }
+
+    /*bootstrap classes sometimes cause Select dropdown
+    menu to not appear in front without this*/
+    .Select-menu-outer {
+      z-index: 10;
+    }
+
+    .gray {
+        color: $gray-text;
+    }
+
+    .highlighted {
+        color: $default-highlight-text-color;
+    }
+
+    .labels {
+        font-size: $small-font-size;
+    }
+
+    .word-wrap {
+      white-space: pre-wrap;
+      word-wrap: normal;
+    }
+
+    .center-vertical {
+        display: flex;
+        align-items: center;
+    }
+
+    .clear {
+      &::after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+    }
+
+    /** Punith */
+    .modalHeader {
+      background: black;
+      color: white;
+    }
+
+    .tableForm {
+      width: 100%;
+      overflow-y: auto;
+      border: 0;
+      
+      td {
+        border: 0;
+      }
+
+      th {
+        border: 0;
+        background-color: black;
+        color: white;
+      }
+      
+      td:first-child {
+        width: 15%;
+      };
+      td:nth-child(2) {
+        width: 35%;
+      };
+      td:nth-child(3) {
+        width: 15%;
+      };
+      td:nth-child(4) {
+        width: 35%;
+      };
+    }
+
+    .tableWithoutBorder {
+      border: 0;
+      
+      th {
+        border: 0;
+        background-color: black;
+        color: white;
+      }
+
+      td {
+        border: 0;
+      }
+    }
+
+    .messageDialogue {
+      width: 100%;
+      border-color: 'white';
+
+      th: {
+        background: black;
+        border-color: black;
+        color: white
+      };
+      
+      tr: {
+        border-color: white;
+      };
+
+      td: {
+        border-color: white;
+      }
+    }
+
+    #liStyle {
+      color: #868E96;
+      font-size: 14px;
+      font-weight: bold;
+      text-align: center;
+      height: 56px;
+      width: 20%;
+      display: inline-block;
+      margin-left: 0;
+      padding: 20px;
+      border-bottom: 2px solid #eee;
+      transition: all .5s;
+      cursor: pointer;
+      background-color: #FFFFFF; // border: 1px solid #ddd;
+    }
+    #ulPanel {
+      padding: 0px;
+      margin: 0px;
+      margin-left: 20px;
+    }
+    #liSelStyle {
+      color: #4868EC;
+      font-size: 14px;
+      font-weight: bold;
+      text-align: center;
+      height: 56px;
+      width: 20%;
+      display: inline-block;
+      margin-left: 0;
+      padding: 20px;
+      transition: all .5s;
+      cursor: pointer;
+      border-bottom: 2px solid #337ab7;
+      background-color: #FFFFFF;
+    }
+    .tab {
+      margin-left: 30px;
+      margin-right: 30px;
+    }
+
+    .introContent{
+      margin-top: 50px;
+      text-align: left;
+      font-size: 30px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 10px;
+      line-height: 1.6;
+    }
+    ul.b {
+      list-style-type: square;
+    }
+    li.b{
+      margin-left: 15px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 10px;
+      line-height: 1.6;
+      //text-decoration: underline;
+    }
+    .underlineText{
+      text-decoration: underline;
+    }
+  }
+}
+
+

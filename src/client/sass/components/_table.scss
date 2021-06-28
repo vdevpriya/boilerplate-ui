@@ -1,0 +1,144 @@
+#report-content {
+    .report-table {
+        margin-top: 30px;
+        display: block;
+        float: left;
+        padding: 0;
+        z-index: 10;
+
+        &.show-totals {
+            .rt-thead.-filters,
+            .rt-thead.-header {
+                height: 60px !important;
+            }
+
+            .rt-thead.-filters {
+                .table-filter {
+                    padding: 15px 0 0 10px !important;;
+                }
+            }
+        }
+        
+        .ReactTable {
+            background-color: white;
+            border-radius: 5px;
+
+            .metrics-trigger {
+                background-color: white;
+                border: 1px solid #CAD9DE;
+                border-radius: 15px;
+                font-size: 11px;
+                margin: 0 auto;
+                user-select: none;
+                display: block;
+                text-align: center;
+                width: 80%;
+                height: 22px;
+                padding-top: 3px;
+
+                &:active {
+                    outline: none;
+                }
+            }
+
+            &.show-filter {
+                .rt-thead.-filters {
+                    display: flex;
+                }
+            }
+
+            .rt-thead.-header {
+                height: 40px;
+                background-color: #E4E7EA;
+                box-shadow: none;
+                border-bottom: 2px solid #CAD9DE;
+            }
+
+            .sub-table {
+                border-radius: 0px;
+                border: none;
+                background-color: #F9F9F9;
+                .rt-thead.-header {
+                    display: none;
+                }
+                .rt-tr-group {
+                    border-bottom: none;
+                }
+            }
+
+            .rt-thead.-filters {
+                display: none;
+                position: absolute;
+                height: 40px;
+                width: 100%;
+
+                .table-filter {
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    background-color: #E4E7EA;
+                    padding: 5px 0 0 10px;
+
+                    input {
+                        position: relative;
+                        padding-right: 20px;
+                    }
+
+                    i {
+                        margin: 6px 0 0 -20px;
+                        position: relative;
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            .rt-thead.-filters,
+            .rt-tr-group {
+                border-bottom: 1px solid #CAD9DE;
+            }
+
+            .rt-td,
+            .rt-th {
+                border-right: 1px solid #CAD9DE;
+                &.table-radio {
+                    text-align: center;
+                }
+            }
+
+            .rt-resizable-header-content {
+                padding-top: 6px;
+                font-weight: bold;
+            }
+
+            .rt-th {
+                text-align: left;
+                padding-left: 10px;
+
+                .toggle-filter {
+
+                    font-weight: bold;
+
+                    .table-header-total {
+                        clear: both;
+                        font-weight: normal; 
+                        display: block;
+                        font-size: 12px;
+                        padding-top: 5px;
+                    }
+
+                    > i {
+                        color: #333;
+                        float: right;
+                        margin-right: 10px;
+                        text-align: center;
+                        height: 20px;
+                        width: 30px;
+                        cursor: pointer;
+                    }
+                }
+            }                
+        }
+    }
+}

@@ -1,0 +1,76 @@
+{
+    "env": "dev",
+    "build": {
+        "routes": {
+            "clientPath": "./src/client",
+            "distPath": "./dist",
+            "npmPath": "./node_modules",
+            "sassPaths": [
+              "node_modules/bootstrap-sass/assets/stylesheets",
+              "node_modules/font-awesome/scss/font-awesome"
+            ],
+            "fontPaths": [
+                "node_modules/bootstrap-sass/assets/fonts/**/*",
+                "node_modules/font-awesome/fonts/fontawesome*"
+            ]
+        }
+    },
+    "server": {
+        "port": 1341,
+        "https": {
+            "enabled": true,
+            "port": 1340,
+            "keyPath": "./src/server/certs/revprod02.wdc.bluekai.com.key",
+            "certPath": "./src/server/certs/revprod02.wdc.bluekai.com.crt"
+        }
+    },
+    "auth": {
+        "enabled": true,
+        "ssoUrl": "https://dmpbeta15.bluekai.com/Login",
+        "cookieUserKey": "bluciferDevUser",
+        "cookieSSOTokenIsSecure": false,
+        "cookieTtl": 3600000,
+
+        "bkUid": "77e8809f188b0a5a284376bcfc63a208c79800ed7efb95dc78d02892dfd76807",
+        "bkSecretKey": "ca7503bbade87f1501a3c7fa808e0d27f9866b2e594aae018f46b32f2d60b870",
+        "bkServicesBaseUrl": "http://dmpbeta15.bluekai.com/",
+
+        "fakeAccount": {
+            "token" : null,
+            "userID" : 7174,
+            "firstName" : "Awesome",
+            "lastName" : "Sauce",
+            "partnerName" : "Lexus - DMP",
+            "partnerID" : 1059,
+            "roles" : ["Power User"],
+            "capabilities" : [],
+            "permissions" : [
+                "DEMI-GOD",
+                "AUDIENCE_ANALYTICS_READ", "AUDIENCE_ANALYTICS_WRITE",
+                "CAMPAIGNS_READ", "CAMPAIGNS_WRITE",
+                "TAG_MANAGEMENT_SCHEDULES_READ",
+                "CONTAINER_READ",
+                "TS_MEDIA_ANALYTICS"
+            ],
+            "partners" : [2452, 2045, 1739, 312601]
+        }
+    },
+    "logger": {
+        "directory": "./log",
+        "filename": "blucifer-dev.log"
+    },
+    "data": {
+        "api": {
+            "clientId": "fbb66f60-f9f2-4083-ac4b-4c3988eceb92",
+            "clientSecret": "6e724f414866527a436a4b64483653453975653071636e6f6c344774695a5a4c684e485a47474a534a6e383d",
+            "baseUrl" : "http://dmp-analytics-api-dev.valkyrie.net",
+
+            "baseUrl-3AMP": "http://dmp-analytics-api.dev.valkyrie.net",
+            "DEV-NO-3AMP" : "http://dmp-analytics-api-dev.valkyrie.net",
+
+            "PROD-NO-3AMP": "http://dmp-analytics-api-prd.valkyrie.net",
+
+            "baseUrlx": "http://dmp-analytics-api-prd.valkyrie.net"
+        }
+    }
+}

@@ -1,0 +1,38 @@
+#animation-container {
+  position: absolute;
+  top: 20%;
+  left:50%;
+  transform: translate(-50%,-50%);
+
+  .loader {
+    border-top: 5px solid rgba(192, 192, 192, 0.5);
+    border-right: 5px solid rgba(192, 192, 192, 0.5);
+    border-bottom: 5px solid rgba(192, 192, 192, 0.5);
+    border-left: 5px solid black;
+    transform: translateZ(0);
+    animation: rotateLoader 1.0s infinite linear;
+  }
+  .loader,
+  .loader:after {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@-webkit-keyframes rotateLoader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotateLoader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

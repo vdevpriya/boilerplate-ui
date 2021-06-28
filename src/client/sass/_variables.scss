@@ -1,0 +1,69 @@
+
+// fonts
+$default-font-color: #4A4A4A;
+$default-background-color: #F2F4F7;
+$default-header-color: #ccc;
+$default-link-hover-color: #85bbe7;
+$default-link-active-color: #0572ce;
+$gray-text: #9B9B9B;
+$dark-gray-text: #444444;
+$default-highlight-text-color: blue;
+
+// app
+$app-bg-color: #fff;
+$box-shadow-color: #ccc;
+$app-tile-color: #fff;
+$text-color: #3a393a;
+
+
+// app tiles
+$app-tile-shadow: 2px 2px 2px -2px $box-shadow-color;
+$app-tile-padding-height: 12px;
+$app-tile-padding-width: 10px;
+$app-tile-top-margin: 10px;
+$app-tile-header-height: 50px;
+$app-tile-border: 1px solid #e3e3e3;
+$app-tile-header-padding: 15px 0;
+$app-tile-header-h3-font-size: 18px;
+$app-tile-header-h3-font-weight: normal;
+$app-tile-header-h3-padding: 0 0 0 0;
+$app-tile-header-h3-margin: 0 0 0 0;
+$app-tile-header-description-font-size: 12px;
+
+// breadcrumbs
+$breadcrumbs-bg-color: #fff;
+$breadcrumbs-bottom-border: 1px solid #dcdee1;
+$breadcrumbs-box-shadow: 0px 5px 5px -5px $box-shadow-color;
+$breadcrumbs-height: 50px;
+
+
+// header
+$header-height: 40px;
+$header-background-color: #f1f1f1;
+$header-box-shadow: 0px 5px 5px -5px $box-shadow-color;
+$header-text-color: #4d4c4d;
+
+// TRANSITIONS
+//slideMenu
+$slide-menu-background-color: #fff;
+$slide-menu-hover-color: #999;
+$slide-menu-transition: transform .33s ease-in-out;
+
+//app content
+$app-content-transition: transform .33s ease-in-out;
+
+//global fetching transition
+$fetching-transition: opacity .3s ease-in;
+
+//font sizing
+$small-font-size: 10px;
+$med-font-size: 12px;
+$large-font-size: 14px;
+
+//buttons
+$primary-btn-bg-color: #0479d8;
+$primary-btn-border: 1px solid #0476d3;
+
+//sidebar
+$sidebar-bg-color: #fafafa;
+$sidebar-togglebar-bg-color: #fafafa;

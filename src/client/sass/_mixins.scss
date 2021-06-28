@@ -1,0 +1,9 @@
+@mixin thin-rounded-border {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+@mixin standard-input-style {
+  padding: 5px 10px;
+  line-height: 24px;
+  @include thin-rounded-border;
+}

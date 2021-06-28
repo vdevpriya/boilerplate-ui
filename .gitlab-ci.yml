@@ -1,0 +1,146 @@
+stages:
+- dockerize
+# - verify_docker
+- deploy_dev_or_qa
+- deploy_prod
+
+
+
+.cache: &cache_template
+    key: SAASDEMOUI
+    paths:
+        - node_modules/
+.prod-publish: &only_prod_publish
+    only:
+        refs:
+            - master
+            - /^prod/
+        variables:
+            - $VERSION == "patch"
+            - $VERSION == "minor"
+            - $VERSION == "major"
+
+
+dockerize master:
+  stage: dockerize
+  only:
+       - master
+  image:
+    # We must use the debug version because it has the embedded shell, which we use in our script below
+    name: gcr.io/kaniko-project/executor:debug-v0.7.0
+    entrypoint: [""]
+  tags: [odc-docker-build]
+  script:
+    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile  --destination containers.oracledatacloud.com/odc-fintech/boilerplate-ui:MASTER-$CI_COMMIT_SHA
+
+
+dockerize branch:
+  stage: dockerize
+  except:
+      - master
+  image:
+    # We must use the debug version because it has the embedded shell, which we use in our script below
+    name: gcr.io/kaniko-project/executor:debug-v0.7.0
+    entrypoint: [""]
+  tags: [odc-docker-build]
+  script:
+    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile  --destination containers.oracledatacloud.com/odc-fintech/boilerplate-ui:DEV-$CI_COMMIT_SHA
+
+
+# verify branch docker image:
+#   stage: verify_docker
+#   tags: [eup]
+#   except: # Skipping for publishes
+#       - master
+#   script:
+#     - echo "Verifying Artifactory contains containers.oracledatacloud.com/odc-fintech/saas-demo-ui:DEV-$CI_COMMIT_SHA"
+#     # TODO We can filter the results with a range if this request becomes too lengthy
+#     - curl -H'Accept:application/json' -H"X-JFrog-Art-API:$ART_KEY" 'https://bin.oracledatacloud.com/artifactory/api/docker/docker-local/v2/odc-fintech/saas-demo-ui/tags/list' | grep -q "DEV-$CI_COMMIT_SHA"
+
+
+
+deploy k8s-dev oci:
+    stage: deploy_dev_or_qa
+    image: containers.oracledatacloud.com/oracledatacloud.com/helmsman:v1.10.1-helm-v2.14.1-nonRoot
+    tags: [finapps,us-iad-a]
+    dependencies: []
+    # no need to d/l cache b/c we are just deploying images from containers.oracledatacloud.com
+    cache: {}
+    environment:
+        name: dev
+    except:
+      - master
+    script:
+        - echo Using image containers.oracledatacloud.com/odc-fintech/boilerplate-ui:DEV-$CI_COMMIT_SHA
+        - echo Will deploy this from template
+        - helm template kubernetes -f kubernetes/dev.yaml --set image=containers.oracledatacloud.com/odc-fintech/boilerplate-ui:DEV-$CI_COMMIT_SHA
+        - helm template kubernetes -f kubernetes/dev.yaml --set image=containers.oracledatacloud.com/odc-fintech/boilerplate-ui:DEV-$CI_COMMIT_SHA | kubectl  -n finapps-dev apply -f -
+        - echo Adding Our ingress
+        - helm template kubernetes/ingress -f kubernetes/ingress/dev-ingress-boilerplate.yaml
+        - helm template kubernetes/ingress -f kubernetes/ingress/dev-ingress-boilerplate.yaml | kubectl  -n finapps-dev apply -f -
+
+#only happen from master
+deploy k8s-qa oci:
+    stage: deploy_dev_or_qa
+    image: containers.oracledatacloud.com/oracledatacloud.com/helmsman:v1.10.1-helm-v2.14.1-nonRoot
+    tags: [finapps,us-iad-a]
+    dependencies: []
+    # no need to d/l cache b/c we are just deploying images from containers.oracledatacloud.com
+    cache: {}
+    environment:
+        name: qa
+    only:
+        - master
+
+    script:
+        - echo Using image containers.oracledatacloud.com/odc-fintech/saas-demo-ui:MASTER-$CI_COMMIT_SHA
+        - echo Will deploy this from template
+        - helm template kubernetes -f kubernetes/qa.yaml --set image=containers.oracledatacloud.com/odc-fintech/saas-demo-ui:MASTER-$CI_COMMIT_SHA
+        - helm template kubernetes -f kubernetes/qa.yaml --set image=containers.oracledatacloud.com/odc-fintech/saas-demo-ui:MASTER-$CI_COMMIT_SHA | kubectl  -n finapps-test apply -f -
+        - echo Adding Our ingress
+        - helm template kubernetes/ingress -f kubernetes/ingress/test-ingress-saasdemo.yaml
+        - helm template kubernetes/ingress -f kubernetes/ingress/test-ingress-saasdemo.yaml | kubectl  -n finapps-test apply -f -
+  
+deploy prod IAD:
+    stage: deploy_prod
+    image: containers.oracledatacloud.com/oracledatacloud.com/helmsman:v1.10.1-helm-v2.14.1-nonRoot
+    tags: [finapps,us-iad-a]
+    
+    dependencies: []
+    # no need to d/l cache b/c we are just deploying images from containers.oracledatacloud.com
+    cache: {}
+    environment:
+        name: production
+    only:
+       - master
+    when: manual
+    script:
+        - echo Using image containers.oracledatacloud.com/odc-fintech/saas-demo-ui:MASTER-$CI_COMMIT_SHA
+        - echo Will deploy this from template
+        - helm template kubernetes -f kubernetes/prod.yaml --set image=containers.oracledatacloud.com/odc-fintech/saas-demo-ui:MASTER-$CI_COMMIT_SHA
+        - helm template kubernetes -f kubernetes/prod.yaml --set image=containers.oracledatacloud.com/odc-fintech/saas-demo-ui:MASTER-$CI_COMMIT_SHA | kubectl -n finapps-prod apply -f -
+        - echo Adding Our ingress
+        - helm template kubernetes/ingress -f kubernetes/ingress/prod-ingress-saasdemo.yaml --set host=saasdemo-ui-prod-public.us-iad-a.k8s.oracledatacloud.com
+        - helm template kubernetes/ingress -f kubernetes/ingress/prod-ingress-saasdemo.yaml --set host=saasdemo-ui-prod-public.us-iad-a.k8s.oracledatacloud.com| kubectl   -n finapps-prod apply -f -
+
+
+deploy prod PHX:
+    stage: deploy_prod
+    image: containers.oracledatacloud.com/oracledatacloud.com/helmsman:v1.10.1-helm-v2.14.1-nonRoot
+    tags: [finapps,us-phx-a]
+    when: manual
+    dependencies: []
+    # no need to d/l cache b/c we are just deploying images from containers.oracledatacloud.com
+    cache: {}
+    environment:
+        name: production
+    only:
+       - master
+    script:
+        - echo Using image containers.oracledatacloud.com/odc-fintech/saas-demo-ui:MASTER-$CI_COMMIT_SHA
+        - echo Will deploy this from template
+        - helm template kubernetes -f kubernetes/prod.yaml --set image=containers.oracledatacloud.com/odc-fintech/saas-demo-ui:MASTER-$CI_COMMIT_SHA
+        - helm template kubernetes -f kubernetes/prod.yaml --set image=containers.oracledatacloud.com/odc-fintech/saas-demo-ui:MASTER-$CI_COMMIT_SHA  | kubectl  -n finapps-prod apply -f -
+        - echo Adding Our ingress
+        - helm template kubernetes/ingress -f kubernetes/ingress/prod-ingress-saasdemo.yaml --set host=saasdemo-ui-prod-public.us-phx-a.k8s.oracledatacloud.com
+        - helm template kubernetes/ingress -f kubernetes/ingress/prod-ingress-saasdemo.yaml --set host=saasdemo-ui-prod-public.us-phx-a.k8s.oracledatacloud.com| kubectl  -n finapps-prod apply -f -

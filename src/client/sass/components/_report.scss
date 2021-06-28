@@ -1,0 +1,201 @@
+#report-container {
+    height: auto;
+
+    #report-view {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+
+        #report-content {
+            padding: 30px;
+        }
+
+        .report-nav {
+            height: 132px;
+            background-color: #f5f5f5;
+            position: relative;
+
+            h1 {
+                font-size: 28px;
+                color: #404141;
+                margin: 0;
+                padding: 30px 0 0 35px;
+            }
+
+            .report-tabs {
+                position: absolute;
+                bottom: 0;
+                left: 35px;
+
+                a {
+                    color: #193D6F;
+                    width: 88px;
+                    height: 39px;
+                    border-top: 4px solid #f5f5f5;
+                    text-decoration: none;
+                    display: block;
+                    float: left;
+                    background-color: #f5f5f5;
+                    text-align: center;
+                    padding-top: 8px;
+
+                    &.active {
+                        background-color: white;
+                        font-weight: bold;
+                        border-top: 4px solid #1F5082;
+                        color: #404141;
+                    }
+                }
+            }
+        }
+
+        .report-header {
+            z-index: 12;
+            .report-title {
+                font-size: 21px;
+                padding: 0;
+
+                .report-count {
+                    color: #193D6F;
+                }
+            }
+
+            .report-settings {
+                padding: 0 0 30px 0;
+
+                .Select-value {
+                    border: 1px solid #ccc;
+                    background-color: white;
+                    color: #333;
+                }
+
+                div.col-xs-2:nth-of-type(1) {
+                    padding-left: 0;
+                }
+
+                div.settings-details {
+                    padding-top: 36px;
+                }
+
+                h6 {
+                    font-size: 14px;
+                    font-weight: normal;
+                    margin-bottom: 5px;
+                }
+            }
+        }
+
+        .report-chart {
+            height: 400px;
+            border: 1px solid #CAD9DE;  
+            border-radius: 4px;
+            padding: 10px;
+
+            #venn-chart {
+                text-align: center;
+
+                &.hidden {
+                    display: none;
+                }
+            }
+
+            .venn-legend {
+                position: absolute;
+                font-size: 13px;
+                user-select: none;
+                left: 0;
+                width: 100%;
+
+                .venn-a {
+                    &::before {
+                        background-color: rgba(31, 119, 180, .25);
+                    }
+                }
+
+                .venn-b {
+                    &::before {
+                        background-color: rgba(255, 127, 14, .25);
+                    }
+                }
+
+                .venn-a,
+                .venn-b {
+                    float: right;
+                    position: relative;
+                    margin-left: 20px;
+                    padding-left: 10px;
+                    &::before {
+                        width: 15px;
+                        height: 15px;
+                        content: '.';
+                        overflow: hidden;
+                        text-indent: 100px;
+                        display: block;
+                        border-radius: 10px;
+                        position: absolute;
+                        left: -10px;
+                        border: 1px solid #ccc;
+                    }
+                }
+            }
+            .recharts-wrapper {
+                margin: 0 auto;
+
+                .recharts-label {
+                    font-weight: bold;
+                }
+            }
+
+            .chart-message {
+                margin: 200px auto 0;
+                text-align: center;
+                user-select: none;
+                position: relative;
+            }
+        }
+
+
+        #report-tooltip,
+        #recharts-tooltip {
+            position: absolute;
+            top: 350px;
+            width: 240px;
+            height: auto;
+            box-shadow: 0 0 5px #888;
+            opacity: 0;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 3px;
+            z-index: 11;
+            font-size: 11px;
+
+            &#recharts-tooltip {
+                position: relative;
+                top: 0;
+                opacity: 1;
+            }
+
+            .tooltip-title {
+                padding: 5px 0;
+                border-bottom: 1px solid #ccc;
+                width: 100%;
+                display: block;
+            }
+
+            .tooltip-list {
+                display: block;
+                width: 100%;
+                padding: 5px;
+                text-align: left;
+
+                > span {
+                    display: block;
+                    float: right;
+                    width: auto;
+                }
+            }
+
+        }
+    }
+}

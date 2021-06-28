@@ -1,0 +1,14 @@
+node_modules/
+dist/css/**
+dist/js/**
+dist/fonts/**
+.DS_Store
+.idea/
+log/**
+.happypack/**
+.lighthouse/**
+*.sublime-project
+*.sublime-workspace
+.lighthouse/*
+.happypack
+yarn-error.log

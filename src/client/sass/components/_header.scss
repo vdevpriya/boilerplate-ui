@@ -1,0 +1,189 @@
+//add globals here
+@import "variables";
+@import "components/slideMenu";
+
+#header {
+  background-color: #000;
+  border-bottom: 1px solid #ccc;
+  height: 65px;
+  width: 100%;
+  position: relative;
+  z-index: 6;
+  padding: 0 10px;
+  color: $header-text-color;
+  user-select: none;
+  box-shadow: $header-box-shadow;
+
+  .logo {
+    position: relative;
+    width: 120px;
+    height: 50px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url(/img/odc-logo.png);
+    margin-top: 5px;
+    float: left;
+  }
+
+  .product-name {
+    position: relative;
+    border-left: 1px solid #d1d1d1;
+    float: left;
+    padding-left: 13px;
+    margin-top: 18px;
+
+    span {
+      color: #fff;
+      font-size: 18px;
+      font-weight: 300;
+    }
+  }
+
+  .nav-pills {
+      float: left;
+
+      .nav-link {
+        > a {
+          background-color: transparent;
+        }
+
+        &.active {
+          > a {
+            color: $dark-gray-text;
+          }
+        }
+      }
+
+      &>li {
+        display:inline-block;
+        list-style-type: none;
+        list-style: none;
+
+        &>a {
+          padding: 0;
+        }
+
+        a, a:hover {
+          color: $dark-gray-text;
+          text-decoration: none;
+        }
+
+        li.disabled a {
+          font-weight: bold;
+        }
+
+        li:not(.disabled) {
+          padding-left: 10px;
+        }
+      }
+
+      &>li+li {
+        margin-left: 0;
+      }
+    }
+
+  .nav-div {
+    display: inline-block;
+    margin-left: 38px;
+
+    .nav-pills {
+      float: left;
+
+      &>li {
+        color: $dark-gray-text;
+        font-weight: bold;
+        font-size: 13px;
+        display:inline-block;
+        list-style-type: none;
+        list-style: none;
+        text-align: center;
+        padding: 5px 15px;
+        border-color: #ccc;
+        border-style: solid;
+        border-left-width: 1px;
+        border-right-width: 0;
+        border-top-width: 1px;
+        border-bottom-width: 1px;
+
+        &>a {
+          padding: 0;
+        }
+
+        &:last-child {
+          border-right: 1px solid #ccc;
+          margin-right: 10px;
+        }
+
+        a, a:hover {
+          color: $dark-gray-text;
+          text-decoration: none;
+        }
+
+        li.disabled a {
+          font-weight: bold;
+        }
+      }
+
+      &>li+li {
+        margin-left: 0;
+      }
+    }
+  }
+
+  .user-menu {
+    display: inline-block;
+    margin-left: auto; /* replaces float:right in display:flex */
+
+    .nav-pills {
+      ul {
+        left: auto;
+        right: 0;
+      }
+
+      &>li {
+        padding: 0;
+
+        &>a {
+          padding: 0;
+
+          &>span {
+            display: block;
+            transform: translateY(50%);
+            float: right;
+          }
+        }
+      }
+    }
+
+    .glyphicon-bell {
+      color: #0372CE;
+      font-size: 18px;
+      margin-right: 5px;
+      float: left;
+      transform: translateY(50%);
+    }
+
+    .circular {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      border-radius: 15px;
+    }
+
+    .name {
+      color: $dark-gray-text;
+      font-weight: medium;
+      font-size: 13px;
+    }
+
+    .partner-info {
+      font-size: 11px;
+      color: #565656;
+
+      .partner-id {
+        color: #777777;
+      }
+    }
+  }
+}
